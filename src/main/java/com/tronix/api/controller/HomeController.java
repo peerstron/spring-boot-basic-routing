@@ -1,7 +1,8 @@
-package com.tronix.api;
+package com.tronix.api.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
@@ -12,8 +13,14 @@ public class HomeController {
 
 
     @GetMapping("/")    // This handles all GET calls directed to the "/" route
-    public String home(){
+    public String home() {
         System.out.println("in Home route...");
-        return "home";
+        return "/pages/home";
     }
+
+    @RequestMapping("*")
+    public String notFoundGet() {
+        return "/pages/not-found";
+    }
+
 }
