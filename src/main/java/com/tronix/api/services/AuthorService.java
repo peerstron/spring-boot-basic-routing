@@ -9,4 +9,8 @@ public interface AuthorService {
 
     // Get all Authors
     List<Author> getAllAuthors();
+    void saveAuthor(Author author);
+    Author getAuthorById(String id);
+    void updateAuthor(Author author);
+    void deleteAuthorById(String id);
 }

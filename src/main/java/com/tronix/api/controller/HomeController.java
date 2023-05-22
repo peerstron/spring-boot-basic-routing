@@ -19,7 +19,7 @@ public class HomeController {
     }
 
     @RequestMapping("*")
-    public String notFoundGet() {
+    public String notFound() {
         return "/pages/not-found";
     }
 
