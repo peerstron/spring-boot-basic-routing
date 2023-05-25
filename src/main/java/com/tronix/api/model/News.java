@@ -14,13 +14,16 @@ public class News {
     private String title;
     @Column(name = "content", nullable = false)
     private String content;
+    @Column(name = "authorId", nullable = false)
+    private String authorId;
 
     // For now, I will generate constructors, getters and setters then later i make use of Lombok to minify the code here
     public News(){}
 
-    public News(String title, String content) {
+    public News(String title, String content, String authorId) {
         this.title = title;
         this.content = content;
+        this.authorId = authorId;
     }
 
     public Integer getId() {
@@ -45,5 +48,13 @@ public class News {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getAuthorId(){
+        return authorId;
+    }
+
+    public void setAuthorId(String authorId) {
+        this.authorId = authorId;
     }
 }
