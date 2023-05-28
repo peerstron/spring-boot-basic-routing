@@ -1,13 +1,21 @@
 package com.tronix.api.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.util.Set;
+
+@Data
+@AllArgsConstructor
 @Entity
 @Table(name = "authors")
 public class Author {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(nullable = false, updatable = false)
     private String id;
     @Column(name = "name", nullable = false)
     private String name;
@@ -15,6 +23,8 @@ public class Author {
     private String email;
     @Column(name = "phone", nullable = false)
     private String phone;
+    @OneToMany(mappedBy = "author")
+    private Set<Article> article;
 
     // For now, I will generate constructors, getters and setters then later i make use of Lombok to minify the code here
 
