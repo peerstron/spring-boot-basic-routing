@@ -5,12 +5,12 @@ import com.tronix.api.services.AuthorService;
 import com.tronix.api.services.implementations.AuthorServiceImplementation;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
-@Controller // This annotation makes this a Spring MVC class in order to handle requests
+import java.util.List;
+
+
+@RestController // This annotation makes this a Spring MVC class in order to handle requests
 public class AuthorController {
 
     private final AuthorService authorService;
@@ -26,6 +26,10 @@ public class AuthorController {
 
         // Return view
         return "/pages/authors";
+    }
+    @GetMapping("/api/v1/authors")
+    public List<Author> listAuthors1(){
+        return authorService.getAllAuthors();
     }
 
     @GetMapping("/authors/new")

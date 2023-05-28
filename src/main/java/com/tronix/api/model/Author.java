@@ -23,12 +23,12 @@ public class Author {
     private String email;
     @Column(name = "phone", nullable = false)
     private String phone;
-    @OneToMany(mappedBy = "author")
-    private Set<Article> article;
 
     // For now, I will generate constructors, getters and setters then later i make use of Lombok to minify the code here
 
-    public Author(){}
+    public Author() {
+    }
+
     public Author(String name, String email, String phone) {
         this.name = name;
         this.email = email;
