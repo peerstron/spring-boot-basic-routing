@@ -2,10 +2,10 @@ package com.tronix.api.services.implementations;
 
 import com.tronix.api.DTOMappers.ArticleDTOMapper;
 import com.tronix.api.dtos.ArticleDTO;
+import com.tronix.api.dtos.UpdateArticleRequestBody;
 import com.tronix.api.model.Article;
 import com.tronix.api.repository.ArticleRepository;
 import com.tronix.api.services.ArticleService;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,6 +16,9 @@ public class ArticleServiceImplementation implements ArticleService {
 
     private final ArticleRepository articleRepository;
     private final ArticleDTOMapper articleDTOMapper;
+    private Article findOrThrow(final String id) {
+        return articleRepository.findById(id).orElseThrow(RuntimeException::new);
+    }
 
     public ArticleServiceImplementation(ArticleRepository articleRepository, ArticleDTOMapper articleDTOMapper) {
         this.articleRepository = articleRepository;
@@ -26,6 +29,19 @@ public class ArticleServiceImplementation implements ArticleService {
     public String createArticle(Article article) {
         Article art = articleRepository.save(article);
         return art.getId();
+    }
+
+    @Override
+    public String updateArticle(String articleId, UpdateArticleRequestBody updateArticleRequestBody) {
+        var article = findOrThrow(articleId);
+        if(updateArticleRequestBody.title() != null){
+            article.setTitle(updateArticleRequestBody.title());
+        }
+        if(updateArticleRequestBody.content() != null){
+            article.setContent(updateArticleRequestBody.content());
+        }
+        articleRepository.save(article);
+        return article.getId();
     }
 
     @Override

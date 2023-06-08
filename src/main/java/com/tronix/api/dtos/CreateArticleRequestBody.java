@@ -1,6 +1,6 @@
 package com.tronix.api.dtos;
 
-public record CreateArticleRequestDTO(
+public record CreateArticleRequestBody(
         String title,
         String content,
         String authorId

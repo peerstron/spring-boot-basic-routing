@@ -1,7 +1,7 @@
 package com.tronix.api.controller;
 
 import com.tronix.api.dtos.ArticleDTO;
-import com.tronix.api.dtos.CreateArticleRequestDTO;
+import com.tronix.api.dtos.CreateArticleRequestBody;
 import com.tronix.api.model.Article;
 import com.tronix.api.model.Author;
 import com.tronix.api.services.ArticleService;
@@ -30,14 +30,23 @@ public class ArticleController {
     }
 
     @PostMapping
-    public String createArticle(CreateArticleRequestDTO createArticleRequestDTO){
-        Author author = authorService.getAuthorById(createArticleRequestDTO.authorId());
+    public String createArticle(CreateArticleRequestBody createArticleRequestBody){
+
+        // Check to make sure Author exist
+        Author author = authorService.getAuthorById(createArticleRequestBody.authorId());
+
+
         Article article = new Article();
-        article.setTitle(createArticleRequestDTO.title());
-        article.setContent(createArticleRequestDTO.content());
+        article.setTitle(createArticleRequestBody.title());
+        article.setContent(createArticleRequestBody.content());
         article.setAuthor(author);
         articleService.createArticle(article);
         return article.getId();
+    }
+
+    @PostMapping("{articleId}")
+    public String Poster(){
+        return "Helloo Post mapping";
     }
 
     @GetMapping("{articleId}")
